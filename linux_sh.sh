@@ -15,6 +15,8 @@ df > fsInfo
 more fsInfo
 
 
+grep '[1]' fsInfo
+
 cp fsInfo fsInfoСopy
 
 cp fsInfo fsInfoСopy2
