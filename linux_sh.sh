@@ -14,8 +14,7 @@ df > fsInfo
 
 more fsInfo
 
-
-grep '[1]' fsInfo
+cat fsInfo |grep -e 1 -e 2
 
 cp fsInfo fsInfoСopy
 
