@@ -4,40 +4,47 @@ package homework.eight.pkgenum;
 import java.util.Scanner;
 
 
-public class Question {
+public abstract class Question {
     
-    private String[][] quetchions = {
-        {"США","СССР","Древний Рим","Великобритания","Италия"},
-        {"ДеГоль","Патон","Монтгомери","Эзенхауер","Мартелл"},
-        {"Воротынский","Жуков","Конев","Рокосовский","Ватутин"}
-    };
-    
-    private int[] answerForQuestion = {2,4,0};
-    
-    private String[] headings = {
-        "Кто победил в первой Пунической войне",
-        "Кто победил в битве при Пуатье",
-        "Кто победил в битве при Молодях"
-    };
-    
-    private boolean[] answerUser = new boolean[3];
-    
-    public void getFullWork(Scanner sc){
-      
-        for(int i =0; i < quetchions.length; i++){
-            
-            System.out.println(headings[i]);
-            
-            printQuestion(quetchions[i]);
-            
-            int userAnswer = Integer.parseInt(sc.nextLine());
-            
-            answerUser[i] = isComparison(userAnswer,answerForQuestion[i]);
-           
-        }
-        
-    }
+    protected String[] quetchions;
+   
+    protected int answerUserInt;
+   
+    protected String headings;
        
+    private boolean[] answerUserArray = new boolean[3];
+    
+    public String getFullWork(Scanner sc){
+        
+        System.out.println(headings);
+            
+        printQuestion(quetchions);
+
+        int userAnswer = this.ScanerAnswer(sc, quetchions.length);
+
+        return answerIsComparison(userAnswer,answerUserInt);
+                   
+    }
+    
+     public int ScanerAnswer  (Scanner sc, int length) {
+      
+        
+        Scanner scanner = new Scanner(sc.nextLine());
+        if (!scanner.hasNextInt()) {
+            System.out.println("вы ввели не число в ведите заново");
+            return this.ScanerAnswer(sc,length);
+        }
+            
+        int answer = scanner.nextInt();
+
+        if(answer > length)  {
+           System.out.println("вы ввели число вне диапазона ответов ведите заново"); 
+           return this.ScanerAnswer(sc,length);
+        }
+           
+        return answer;
+
+    }
     
     private void printQuestion(String[] someQuestion){
         for(int i = 0; i < someQuestion.length; i++) { 
@@ -46,23 +53,13 @@ public class Question {
     }
     
     
-    private boolean isComparison(int userAnswer, int answerForQuestion){
+    private String answerIsComparison(int userAnswer, int answerForQuestion){
        
-        return userAnswer == answerForQuestion;
+        if(userAnswer == answerForQuestion) return "В вопросе " + headings + " ответ верен\n";
+        
+        return "В вопросе " + headings + " ответ неверен\n";
     }
 
-    @Override
-    public String toString() {
-        String printString = "";
-        for(int i =0; i < answerUser.length; i++){
-            if(answerUser[i]){
-                printString += "В вопросе " + headings[i] + " ответ верен\n";
-            }else{
-                printString +="В вопросе " + headings[i] + " ответ неверен\n";
-            } 
-        }   
-        return printString;
-    }
-    
+     
     
 }

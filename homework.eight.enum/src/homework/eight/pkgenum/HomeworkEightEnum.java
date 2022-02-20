@@ -7,12 +7,16 @@ public class HomeworkEightEnum {
 
 
     public static void main(String[] args) {
-         Scanner sc = new Scanner(System.in);
-         
-        Question question = new Question();
-        question.getFullWork(sc);
         
-        System.out.println(question.toString());
+        Question[] arrayQuestion = {new OneQuestion(),new TwoQuestion(),new ThreeQuestion()};
+        
+        Scanner sc = new Scanner(System.in);
+        StringBuilder sb = new StringBuilder();
+        for( Question question : arrayQuestion) {
+            sb.append(question.getFullWork(sc));
+        }
+        
+        System.out.println(sb);
     }
     
 }
