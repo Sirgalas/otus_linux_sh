@@ -13,37 +13,55 @@ public class HomeworkSix {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String[][] quetchions = {
+        String[][] questions = {
             {"США","СССР","Древний Рим","Великобритания","Италия"},
             {"ДеГоль","Патон","Монтгомери","Эзенхауер","Мартелл"},
             {"Воротынский","Жуков","Конев","Рокосовский","Ватутин"}
         };
-        int[] answerForQuestion = {2,4,0};
+        
+        int[] answerCorrect = {2,4,0};
+        
         String[] headings = {
             "Кто победил в первой Пунической войне",
             "Кто победил в битве при Пуатье",
             "Кто победил в битве при Молодях"
         };
-        Scanner sc = new Scanner(System.in);
-        boolean[] answerUser = new boolean[3];
-        for(int i =0; i < quetchions.length; i++){
+        
+        boolean[] userAnswersArray = new boolean[3];
+        for(int i =0; i < questions.length; i++){
             System.out.println(headings[i]);
-            String [] someQuestion = quetchions[i];
+            String [] someQuestion = questions[i];
             for(int j = 0; j < someQuestion.length; j++){
                 System.out.println("если " + someQuestion[j] + " выбирите "+ j);
             }
-            int userAnswer = Integer.parseInt(sc.nextLine());
-            
-            answerUser[i] = comparison(userAnswer,answerForQuestion[i]);
+            int userAnsewerInt  = HomeworkSix.ScanerAnswer(new Scanner(System.in),someQuestion.length);
+            userAnswersArray[i] =  userAnsewerInt == answerCorrect[i];
+           
         }
-        
-        printResult(answerUser,headings);
+         printResult(userAnswersArray,headings);
     } 
     
-    public static boolean comparison(int userAnswer, int answerForQuestion){
-       
-        return userAnswer == answerForQuestion;
+    
+    public static int ScanerAnswer  (Scanner sc, int length) {
+      
+        
+        Scanner scanner = new Scanner(sc.nextLine());
+        if (!scanner.hasNextInt()) {
+            System.out.println("вы ввели не число в ведите заново");
+            return HomeworkSix.ScanerAnswer(sc,length);
+        }
+            
+        int answer = scanner.nextInt();
+
+        if(answer > length)  {
+           System.out.println("вы ввели число вне диапазона ответов ведите заново"); 
+           return HomeworkSix.ScanerAnswer(sc,length);
+        }
+           
+        return answer;
+
     }
+
     
     public static void printResult(boolean[] answerUser, String[] headings){
         for(int i =0; i < answerUser.length; i++){
