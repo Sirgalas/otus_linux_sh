@@ -20,30 +20,28 @@ public abstract class Question {
             
         printQuestion(quetchions);
 
-        int userAnswer = this.ScanerAnswer(sc, quetchions.length);
+        int userAnswer = this.scanerAnswer(sc, quetchions.length);
 
         return answerIsComparison(userAnswer,answerUserInt);
                    
     }
     
-     public int ScanerAnswer  (Scanner sc, int length) {
+     public int scanerAnswer  (Scanner sc, int length) {
       
-        
-        Scanner scanner = new Scanner(sc.nextLine());
-        if (!scanner.hasNextInt()) {
-            System.out.println("вы ввели не число в ведите заново");
-            return this.ScanerAnswer(sc,length);
-        }
-            
-        int answer = scanner.nextInt();
+        String answer = sc.nextLine();
+        try{
+            int answerToInteger = Integer.parseInt(answer);
 
-        if(answer > length)  {
-           System.out.println("вы ввели число вне диапазона ответов ведите заново"); 
-           return this.ScanerAnswer(sc,length);
-        }
-           
-        return answer;
+            if(answerToInteger > length - 1)  {
+               System.out.println("вы ввели число вне диапазона ответов ведите заново"); 
+               return this.scanerAnswer(sc,length);
+            }
 
+            return answerToInteger;
+        } catch(NumberFormatException exeption) {
+            System.out.println("вы ввели не число ответов ведите заново"); 
+            return this.scanerAnswer(sc,length);
+        }    
     }
     
     private void printQuestion(String[] someQuestion){
