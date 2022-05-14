@@ -7,22 +7,19 @@ import java.util.Map;
 
 public class Hundreds implements IntToStringInterface {
     
-    Map<Integer, String> map = new HashMap<>();
+    Map<Integer, String> map = Map.of(
+            100, "cто", 
+            200, "двести", 
+            300, "тристо", 
+            400, "четыреста", 
+            500, "пятьсот", 
+            600, "шестьсот",
+            700, "семьсот",
+            800, "восемьсот",
+            900, "девятьсот"
+            );
    
-    
-    public Hundreds (){
-        map.put(100, "cто");
-        map.put(200, "двести");
-        map.put(300, "тристо");
-        map.put(400, "четыреста");
-        map.put(500, "пятьсот");
-        map.put(600, "шестьсот");
-        map.put(700, "семьсот");
-        map.put(800, "восемьсот");
-        map.put(900, "девятьсот");
-        
-    }
-    
+       
     @Override
     public String intToString(Integer quantity) throws Exception {  
         

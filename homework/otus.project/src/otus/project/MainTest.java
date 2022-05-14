@@ -6,17 +6,19 @@ public class MainTest {
    public static String[] currency = {"рубль","рубля","рублей"};
 
     public static void main(String[] args) {
-        
-        try{
-            (new Bridge()).bridge(-1);
+
+     
+       try{
+           System.out.println(new ReturnString().returnString(55));
+            if(!"пятьдесят пять рублей".equals(new ReturnString().returnString(55))){
+                throw new TestException("не соответствует ");
+            }
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-        
-        try{
-            (new Bridge()).bridge(1001);
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+       
+       
     } 
+    
+    
 }
